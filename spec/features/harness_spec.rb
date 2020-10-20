@@ -69,12 +69,11 @@ RSpec.describe 'Spec Harness' do
 
         # Delete a item
         delete_response = conn("/api/v1/items/#{new_item[:id]}").delete
-
         expect(delete_response.body).to be_empty
         expect(delete_response.status).to eq(204)
       end
 
-      it 'can update an item' do
+      xit 'can update an item' do
         name = "Shiny Itemy Item"
         description = "It does a lot of things real good"
         unit_price = 5011
@@ -111,7 +110,7 @@ RSpec.describe 'Spec Harness' do
     end
 
     describe 'Merchants' do
-      it 'can get a merchant' do
+      xit 'can get a merchant' do
         response = conn('/api/v1/merchants/42').get
 
         expected_attributes = {
@@ -127,7 +126,7 @@ RSpec.describe 'Spec Harness' do
         end
       end
 
-      it 'can get all merchants' do
+      xit 'can get all merchants' do
         response = conn('/api/v1/merchants').get
         json = JSON.parse(response.body, symbolize_names: true)
 
@@ -138,7 +137,7 @@ RSpec.describe 'Spec Harness' do
         end
       end
 
-      it 'can create and delete a merchant' do
+      xit 'can create and delete a merchant' do
         name = "Dingle Hoppers"
 
         body = {
@@ -162,7 +161,7 @@ RSpec.describe 'Spec Harness' do
         expect(delete_response.status).to eq(204)
       end
 
-      it 'can update a merchant' do
+      xit 'can update a merchant' do
         name = "Dingle Hoppers"
 
         body = {
@@ -188,7 +187,7 @@ RSpec.describe 'Spec Harness' do
   end
 
   describe 'Relationships' do
-    it 'can get items for a merchant' do
+    xit 'can get items for a merchant' do
       response = conn('/api/v1/merchants/99/items').get
       json = JSON.parse(response.body, symbolize_names: true)
       expected_ids =
@@ -205,7 +204,7 @@ RSpec.describe 'Spec Harness' do
       expect(item_ids.sort).to eq(expected_ids)
     end
 
-    it 'can get merchant for an item' do
+    xit 'can get merchant for an item' do
       response = conn('/api/v1/items/209/merchant').get
       json = JSON.parse(response.body, symbolize_names: true)
       expected_id = '11'
@@ -215,7 +214,7 @@ RSpec.describe 'Spec Harness' do
   end
 
   describe "search endpoints" do
-    it 'can find a list of merchants that contain a fragment, case insensitive' do
+    xit 'can find a list of merchants that contain a fragment, case insensitive' do
       response = conn('/api/v1/merchants/find_all?name=ILL').get
       json = JSON.parse(response.body, symbolize_names: true)
 
@@ -226,7 +225,7 @@ RSpec.describe 'Spec Harness' do
       expect(names.sort).to eq(["Schiller, Barrows and Parker", "Tillman Group", "Williamson Group", "Williamson Group", "Willms and Sons"])
     end
 
-    it 'can find a merchants that contain a fragment, case insensitive' do
+    xit 'can find a merchants that contain a fragment, case insensitive' do
       response = conn('/api/v1/merchants/find?name=ILL').get
       json = JSON.parse(response.body, symbolize_names: true)
       name = json[:data][:attributes][:name].downcase
@@ -235,7 +234,7 @@ RSpec.describe 'Spec Harness' do
       expect(name).to include('ill')
     end
 
-    it 'can find a list of items that contain a fragment, case insensitive' do
+    xit 'can find a list of items that contain a fragment, case insensitive' do
       response = conn('/api/v1/items/find_all?name=haru').get
       json = JSON.parse(response.body, symbolize_names: true)
 
@@ -249,7 +248,7 @@ RSpec.describe 'Spec Harness' do
       end
     end
 
-    it 'can find an items that contain a fragment, case insensitive' do
+    xit 'can find an items that contain a fragment, case insensitive' do
       response = conn('/api/v1/items/find?name=haru').get
       json = JSON.parse(response.body, symbolize_names: true)
       name = json[:data][:attributes][:name].downcase
@@ -260,7 +259,7 @@ RSpec.describe 'Spec Harness' do
   end
 
   describe 'business intelligence' do
-    it 'can get merchants with most revenue' do
+    xit 'can get merchants with most revenue' do
       response = conn("/api/v1/merchants/most_revenue?quantity=7").get
       json = JSON.parse(response.body, symbolize_names: true)
 
@@ -276,7 +275,7 @@ RSpec.describe 'Spec Harness' do
       expect(json[:data][6][:id]).to eq("53")
     end
 
-    it 'can get merchants who have sold the most items' do
+    xit 'can get merchants who have sold the most items' do
       response = conn("/api/v1/merchants/most_items?quantity=8").get
 
       json = JSON.parse(response.body, symbolize_names: true)
@@ -293,7 +292,7 @@ RSpec.describe 'Spec Harness' do
       expect(json[:data][7][:id]).to eq("84")
     end
 
-    it 'can get revenue between two dates' do
+    xit 'can get revenue between two dates' do
       response = conn('/api/v1/revenue?start=2012-03-09&end=2012-03-24').get
 
       json = JSON.parse(response.body, symbolize_names: true)
