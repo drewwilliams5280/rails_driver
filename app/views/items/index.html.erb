@@ -1,8 +1,14 @@
 <h1>Items</h1>
-<div id="items">
 
-</div>
+<%= form_tag '/items', method: :get do %>
+  <%= search_field_tag :search, nil, placeholder: 'Search by item name' %>
+  <%= submit_tag 'Submit', data: { disable_with: "Please enter keyword" } %>
+<% end %>
 
-<script>
-  loadAllItems($("#items"))
-</script>
+<% if @items %>
+  <h3><%= @items.count %> results</h3>
+  <% @items.each do |item| %>
+    <p>Item name: <%= item.name %></p>
+    <p>Item price: <%= item.unit_price %></p>
+  <% end %>
+<% end %>

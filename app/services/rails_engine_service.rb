@@ -12,6 +12,10 @@ class RailsEngineService
     to_json("/api/v1/merchants/#{id}/revenue")
   end
 
+  def self.find_items(search_term)
+    to_json("/api/v1/items/find_all", { name: search_term })
+  end
+
   def self.to_json(url, params = {})
     private
     response = conn.get(url) do |f|

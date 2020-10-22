@@ -16,4 +16,11 @@ class RailsEngineFacade
     merchant.revenue = total_revenue
   end
 
+  def self.find_items(search_term)
+    items_data = RailsEngineService.find_items(search_term)
+    items_data[:data].map do |data|
+      Item.new(data)
+    end
+  end
+
 end
