@@ -1,10 +1,2 @@
-<div id="merchant">
-</div>
-
-<div id="items">
-</div>
-
-<script>
-  loadMerchantWithEdit(<%= @merchant_id %>, $('#merchant'))
-  loadMerchantItems(<%= @merchant_id %>, $("#items"))
-</script>
+<p>Merchant name: <%= @merchant.name %></p>
+<p>Revenue: $<%= @merchant.revenue %></p>
